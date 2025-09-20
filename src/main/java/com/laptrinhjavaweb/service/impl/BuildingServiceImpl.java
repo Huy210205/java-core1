@@ -4,28 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.laptrinhjavaweb.converter.BuildingConverter;
-import com.laptrinhjavaweb.dao.BuildingDao;
-import com.laptrinhjavaweb.dao.RentAreaDao;
-import com.laptrinhjavaweb.dao.anhyeuem.BuildingAnhyeuem;
-import com.laptrinhjavaweb.dao.impl.BuildingDaoImpl;
-import com.laptrinhjavaweb.dao.impl.RentAreaDaoImpl;
 import com.laptrinhjavaweb.dto.BuildingDTO;
 import com.laptrinhjavaweb.input.BuildingSearchInput;
 import com.laptrinhjavaweb.output.BuildingOutput;
+import com.laptrinhjavaweb.repository.BuildingRepository;
+import com.laptrinhjavaweb.repository.RentAreaRepository;
+import com.laptrinhjavaweb.repository.Impl.BuildingRepositoryImpl;
+import com.laptrinhjavaweb.repository.Impl.RentAreaRepositoryImpl;
+import com.laptrinhjavaweb.repository.entity.BuildingEntity;
 import com.laptrinhjavaweb.service.BuildingService;
 
 public class BuildingServiceImpl implements BuildingService {
 	private BuildingConverter buildingConverter = new BuildingConverter();
-	private RentAreaDao rentAreaDao = new RentAreaDaoImpl();
+	private RentAreaRepository rentAreaDao = new RentAreaRepositoryImpl();
 
-	private BuildingDao buildingDao = new BuildingDaoImpl();
+	private BuildingRepository buildingDao = new BuildingRepositoryImpl();
 
 	@Override
 	public List<BuildingOutput> findBuilding(BuildingSearchInput buildingModel) {
 
 		List<BuildingOutput> buildingEmyeuanhs = new ArrayList<>();
 
-		List<BuildingAnhyeuem> anhyeuems = buildingDao.findBuilding(
+		List<BuildingEntity> anhyeuems = buildingDao.findBuilding(
 				buildingModel.getFloorArea(),
 				buildingModel.getName(),
 				buildingModel.getWard(),
@@ -34,7 +34,7 @@ public class BuildingServiceImpl implements BuildingService {
 				buildingModel.getType());
 
 		// int i = 0;
-		for (BuildingAnhyeuem item : anhyeuems) {
+		for (BuildingEntity item : anhyeuems) {
 			//anhyeuem -> buildingOutput
 			BuildingOutput buildingOutput = buildingConverter.converFromAnhyeuemToOutput(item);
 			
@@ -48,7 +48,7 @@ public class BuildingServiceImpl implements BuildingService {
 		// TODO Auto-generated method stub
 		if(buildingDTO.getId() == null) {
 			//insert: dto -> anhyeuem
-			BuildingAnhyeuem buildingAnhyeuem = buildingConverter.converFromDtoToAnhyeuem(buildingDTO);
+			BuildingEntity buildingAnhyeuem = buildingConverter.converFromDtoToAnhyeuem(buildingDTO);
 			//Long buildingId = buildingDao.insert(buildingAnhyeuem);
 			/*if(buildingDTO.getRentAreas().length() > 0) {
 				for (String item: buildingDTO.getRentAreas().split(",")) {

@@ -1,17 +1,17 @@
-package com.laptrinhjavaweb.dao.impl;
+package com.laptrinhjavaweb.repository.Impl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.laptrinhjavaweb.dao.RentAreaDao;
-import com.laptrinhjavaweb.dao.anhyeuem.RentAreaAnhyeuem;
+import com.laptrinhjavaweb.repository.RentAreaRepository;
+import com.laptrinhjavaweb.repository.entity.RentAreaEntity;
 import com.laptrinhjavaweb.utils.ConnectionUtils;
 
-public class RentAreaDaoImpl implements RentAreaDao {
+public class RentAreaRepositoryImpl implements RentAreaRepository {
 
 	@Override
-	public void insert(RentAreaAnhyeuem areaAnhyeuem) {
+	public void insert(RentAreaEntity areaAnhyeuem) {
 		
 		 try (Connection conn = ConnectionUtils.getConnection();
 		         Statement stmt = conn.createStatement()) {

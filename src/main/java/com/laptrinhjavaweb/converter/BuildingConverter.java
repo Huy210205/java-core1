@@ -1,12 +1,12 @@
 package com.laptrinhjavaweb.converter;
 
-import com.laptrinhjavaweb.dao.anhyeuem.BuildingAnhyeuem;
 import com.laptrinhjavaweb.dto.BuildingDTO;
 import com.laptrinhjavaweb.output.BuildingOutput;
+import com.laptrinhjavaweb.repository.entity.BuildingEntity;
 import com.laptrinhjavaweb.utils.BuildingTypeUtils;
 
 public class BuildingConverter {
-	public BuildingOutput converFromAnhyeuemToOutput(BuildingAnhyeuem buildingAnhyeuem) {
+	public BuildingOutput converFromAnhyeuemToOutput(BuildingEntity buildingAnhyeuem) {
 		
 		BuildingOutput result = new BuildingOutput();
 		result.setName(buildingAnhyeuem.getName());
@@ -16,8 +16,8 @@ public class BuildingConverter {
 		return result;
 		
 	}
-	public BuildingAnhyeuem converFromDtoToAnhyeuem(BuildingDTO buildingDTO) {
-		BuildingAnhyeuem result = new BuildingAnhyeuem();
+	public BuildingEntity converFromDtoToAnhyeuem(BuildingDTO buildingDTO) {
+		BuildingEntity result = new BuildingEntity();
 		result.setName(buildingDTO.getName());
 		result.setStreet(buildingDTO.getStreet());
 		
