@@ -1,4 +1,4 @@
-package com.laptrinhjavaweb.dao.impl;
+package com.laptrinhjavaweb.repository.impl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.laptrinhjavaweb.constant.SystemConstant;
-import com.laptrinhjavaweb.dao.BuildingDao;
-import com.laptrinhjavaweb.dao.anhyeuem.BuildingAnhyeuem;
+import com.laptrinhjavaweb.repository.entity.BuildingEntity;
+import com.laptrinhjavaweb.repository.BuildingRepository;
 import com.laptrinhjavaweb.utils.ConnectionUtils;
 import com.laptrinhjavaweb.utils.StringUtils;
 
-public class BuildingDaoImpl implements BuildingDao {
+public class BuildingRepositoryImpl implements BuildingRepository {
 
 	@Override
-	public List<BuildingAnhyeuem> findBuilding(Integer floorArea, String name, String ward, String street,
+	public List<BuildingEntity> findBuilding(Integer floorArea, String name, String ward, String street,
 			String district, String type) {
-		List<BuildingAnhyeuem> results = new ArrayList<>();
+		List<BuildingEntity> results = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -51,14 +51,14 @@ public class BuildingDaoImpl implements BuildingDao {
 			rs = stmt.executeQuery(sql.toString());
 
 			while (rs.next()) {
-				BuildingAnhyeuem buildingAnhyeuem = new BuildingAnhyeuem();
-				buildingAnhyeuem.setName(rs.getString("name"));
-				buildingAnhyeuem.setStreet(rs.getString("street"));
-				buildingAnhyeuem.setWard(rs.getString("ward"));
-				buildingAnhyeuem.setDistrict(rs.getString("district"));
-				buildingAnhyeuem.setFloorArea(rs.getInt("floorarea"));
-				buildingAnhyeuem.setType(rs.getString("type"));
-				results.add(buildingAnhyeuem);
+				BuildingEntity buildingEntity = new BuildingEntity();
+				buildingEntity.setName(rs.getString("name"));
+				buildingEntity.setStreet(rs.getString("street"));
+				buildingEntity.setWard(rs.getString("ward"));
+				buildingEntity.setDistrict(rs.getString("district"));
+				buildingEntity.setFloorArea(rs.getInt("floorarea"));
+				buildingEntity.setType(rs.getString("type"));
+				results.add(buildingEntity);
 			}
 			return results;
 		} catch (ClassNotFoundException | SQLException e) {
@@ -81,7 +81,7 @@ public class BuildingDaoImpl implements BuildingDao {
 	}
 
 	@Override
-	public Long insert(BuildingAnhyeuem buildingAnhyeuem, String rentAreas) {
+	public Long insert(BuildingEntity buildingEntity, String rentAreas) {
 
 		ResultSet resultSet = null;
 		Long buildingId = null;
@@ -91,8 +91,8 @@ public class BuildingDaoImpl implements BuildingDao {
 			conn = ConnectionUtils.getConnection();
 			stmt = conn.createStatement();
 			conn.setAutoCommit(false);
-			String sql = "INSERT INTO building(name,street) VALUES ('" + buildingAnhyeuem.getName() + "','"
-					+ buildingAnhyeuem.getStreet() + "')";
+			String sql = "INSERT INTO building(name,street) VALUES ('" + buildingEntity.getName() + "','"
+					+ buildingEntity.getStreet() + "')";
 
 			int flag = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
 			resultSet = stmt.getGeneratedKeys();

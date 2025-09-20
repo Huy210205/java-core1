@@ -1,30 +1,29 @@
 package com.laptrinhjavaweb.converter;
 
-import com.laptrinhjavaweb.dao.anhyeuem.BuildingAnhyeuem;
 import com.laptrinhjavaweb.dto.BuildingDTO;
 import com.laptrinhjavaweb.output.BuildingOutput;
+import com.laptrinhjavaweb.repository.entity.BuildingEntity;
 import com.laptrinhjavaweb.utils.BuildingTypeUtils;
 
 public class BuildingConverter {
-	public BuildingOutput converFromAnhyeuemToOutput(BuildingAnhyeuem buildingAnhyeuem) {
-		
+	public BuildingOutput converFromEntityToOutput(BuildingEntity buildingEntity) {
+
 		BuildingOutput result = new BuildingOutput();
-		result.setName(buildingAnhyeuem.getName());
-		result.setAddress(buildingAnhyeuem.getStreet() + " - " + buildingAnhyeuem.getWard() + "-" + buildingAnhyeuem.getDistrict());
+		result.setName(buildingEntity.getName());
+		result.setAddress(
+				buildingEntity.getStreet() + " - " + buildingEntity.getWard() + "-" + buildingEntity.getDistrict());
 		// Chuyển type code sang name
-		result.setType(BuildingTypeUtils.getType(buildingAnhyeuem.getType()));
+		result.setType(BuildingTypeUtils.getType(buildingEntity.getType()));
 		return result;
-		
+
 	}
-	public BuildingAnhyeuem converFromDtoToAnhyeuem(BuildingDTO buildingDTO) {
-		BuildingAnhyeuem result = new BuildingAnhyeuem();
+
+	public BuildingEntity converFromDtoToEntity(BuildingDTO buildingDTO) {
+		BuildingEntity result = new BuildingEntity();
 		result.setName(buildingDTO.getName());
 		result.setStreet(buildingDTO.getStreet());
-		
-	return result;
+
+		return result;
 	}
-	
-	
-	
 
 }

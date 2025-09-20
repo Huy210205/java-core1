@@ -1,6 +1,6 @@
-package com.laptrinhjavaweb.dao.anhyeuem;
+package com.laptrinhjavaweb.repository.entity;
 
-public class RentAreaAnhyeuem {
+public class RentAreaEntity {
 	
 	private Integer value;
 	private Long id;

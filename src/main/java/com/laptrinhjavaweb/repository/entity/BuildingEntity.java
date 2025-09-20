@@ -1,6 +1,6 @@
-package com.laptrinhjavaweb.dao.anhyeuem;
+package com.laptrinhjavaweb.repository.entity;
 
-public class BuildingAnhyeuem {
+public class BuildingEntity {
 	private Long id;
 	private String name;
 	private String ward;
