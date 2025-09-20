@@ -38,4 +38,4 @@ public class BuildingListView {
 		// System.out.println("test");
 
 	}
-}
+}//hi
